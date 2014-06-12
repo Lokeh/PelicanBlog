@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Will Acton'
 SITENAME = u'Will Acton : Web Developer and Brazilian Jiu Jitsu Fanatic'
 SITEDESC = u'Web developer and BJJ fanatic from Portland, OR. A blog about front end, back end, every-end web development. Fitness and jiu jitsu also make appearances.'
-SITEURL = u'http://localhost:8000'
+SITEURL = u'http://willacton.com/blog/'
 
 TIMEZONE = 'USA/Pacific'
 THEME = "theme/summerblue"
