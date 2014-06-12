@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="{{ SITEDESC }}">
+		<meta name="author" content="{{ AUTHOR }}">
+		<title>{{ SITENAME }}</title>
+		<link href="{{ SITEURL }}/theme/css/normalize.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{ SITEURL }}/theme/style.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<section class="sidebar">
+				<h1><a href="{{ SITEURL }}">Will Acton</a></h1>
+				<div id="round-pic"></div>
+				<h2>Web Developer <i class="and"></i>  BJJ Fanatic</h2>
+				<ul class="nav" role="navigation">
+					<li><a href="/">Home</a></li>
+				{% for p in PAGES %}
+		            | <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+	        	{% endfor %}
+				</ul>
+				
+				<ul class="socials">
+					<li><a href="mailto:hello@willacton.com" target=_blank><i class="fa fa-envelope fa-2x"></i></a></li>
+					<li><a href="http://github.com/Lokeh/" target=_blank><i class="fa fa-github fa-2x"></i></a></li>
+					<li><a href="https://www.linkedin.com/pub/will-acton/5b/375/66b" target=_blank><i class="fa fa-linkedin fa-2x"></i></a></li>
+				</ul>
+
+				<h3>Recent posts</h3>
+				<ul class="activity">
+				{% for a in articles %}
+					<li><a href="{{ a.url }}">{{ a.title }}</a></li>
+				{% endfor %}
+				</ul>
+			</section>
+			<section class="main">
+				{% block header %}
+				{% endblock %}
+				<div class="content">
+					{% block content %}
+					{% endblock %}
+				</div>
+				<div class="footer">
+					Copyright Will Acton.
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
