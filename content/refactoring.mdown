@@ -1,0 +1,18 @@
+Title: Refactor, Refactor, Refactor: Learns from JavaScript, Pragmatic Programmer
+Date: 2014-06-13 19:00
+Category: blogpost
+Tags: JavaScript, Learns, Pragmatic Programmer
+Slug: learns-from-javascript-pragmatic-programmer
+Author: Will Acton
+Summary: 
+
+> Most people assume that maintenace begins when an application is released, that maintenance means fixing bugs and enhancing features. We think these people are wrong. Programmers are constantly in maintenance mode. Our understanding changes day by day. New reuiqrements arrive as we're designing or coding. perhaps the environment changes. Whatever the reason, maintenance is not a discrete activity, but a routine part of the entire development process.
+			- *The Pragmatic Programmer*, pg. 26
+
+A little over a month ago, I decided to learn JavaScript. This wouldn't be my first time learning a new language: over the years I've dealt in C and C++, Perl, PHP, Python, BASIC... never JavaScript. I had tried to avoid it for all I could, what with people feeding me horror stories of poor performance, inconsistant cross-browser compatability, and terrible coding standards baked into the language. And many of the stories they told me are true, but the war in the early 2000s was won and the victor clear: JavaScript is here to stay. Also, having spent the bulk of my time coding using PHP, according to popular opinion I've already stared into the abyss too long.
+
+However, I am armed with new information, and a new way of thinking about software and it's development. I am fairly confident in my ability to write code - as in, it compiles/runs, it doesn't throw any (serious) exceptions, and does it's function. Pumping out a program that does mostly what I want isn't something I worry about anymore. I know that most problems I can think of or come across, someone, somewhere has solved it at this point; the important part is the **implementation**.
+
+And that's what I think about now when I sit down to code. Not how I'm going to make my code run, but how I'm going to structure the code so that it's easily maintenable, easily reused, and easily read. I want to stop hating me-from-3-months ago, and to do that I'm going to do me-in-3-months a solid by planning, and then refactoring, refactoring, refactoring.
+
+I am currently working on a mobile application to track routes, stops and arrivals for the Portland Trimet system. I have probably rewritten each piece of the app at least once, and near the top of my to do list is "Refactor factories into one 'transitFactory' that divides controller from model better." I have accepted the fact that, at least on my personal projects, rewriting large amounts of code is not only going to happen but is absolutely a good thing. As I rewrite, I will learn how I can plan things better for my next project, as well as understand how to create code that can be rewritten - another thing *The Pragmatic Programmer*, by Andrew Hunt and David Thomas, talks about.
