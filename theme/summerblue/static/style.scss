@@ -11,6 +11,7 @@ $secondary-color: #fff;
 $highlight-color: #ff9872;
 $grey: #eaeaea;
 $jeet-gutter: 1.5;
+$body-font-color: #333;
 
 * {
 	box-sizing: border-box;
@@ -49,7 +50,7 @@ p {
 body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 18px;
-	color: #333;
+	color: $body-font-color;
 }
 
 .container {
@@ -133,7 +134,7 @@ body {
 	}
 
 	a {
-		color: #333;
+		color: lighten($body-font-color, 20%);
 	}
 
 	a:hover {

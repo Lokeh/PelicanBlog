@@ -46,7 +46,7 @@ p {
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
-  color: #333; }
+  color: #333333; }
 
 .container {
   max-width: 1150px;
@@ -103,7 +103,7 @@ body {
   .main h2 a, .main h2 a:visited, .main h2 a:active {
     color: #333; }
   .main a {
-    color: #333; }
+    color: #666666; }
   .main a:hover {
     color: #ff9872; }
   .main .header {

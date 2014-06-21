@@ -38,7 +38,7 @@
 				<h3>Recent posts</h3>
 				<ul class="activity">
 				{% for a in articles %}
-					<li><a href="{{ a.url }}">{{ a.title }}</a></li>
+					<li><a href="{{ SITEURL }}/{{ a.url }}">{{ a.title }}</a></li>
 				{% endfor %}
 				</ul>
 			</section>
