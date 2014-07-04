@@ -37,6 +37,7 @@
 
 				<h3>Recent posts</h3>
 				<ul class="activity">
+					<li><a href="http://willacton.com/fairy-magic.html">Fairy Magic: Exploring Angular-like 2-Way Databinding</a></li>
 					<li><a href="http://willacton.com/learns-from-javascript-pragmatic-programmer.html">Refactor, Refactor, Refactor: Learns from JavaScript, Pragmatic Programmer</a></li>
 				</ul>
 			</section>
@@ -46,8 +47,24 @@
 	    <h2>Projects</h2>
 	    
 
-	    <div class="project">
+	    <style>
+    .project > .image {
+        height: 198px;
+        overflow: hidden;
+        width: 63%;
+        margin: 0 auto;
+    }
+
+    .project > .image > img {
+        width: 100%;
+    }
+</style>
+
+<div class="project">
     <h1>PDX InTransit</h1>
+    <div class="image">
+        <img src="/theme/routes.jpg">
+    </div>
     <p>A mobile web app for tracking arrivals of Trimet buses, trains and shuttles. Includes Google Maps plotting, real-time arrivals, plus easy route and stop filtering. Built using AngularJS and Foundation UI.</p>
     <ul class="links"><li><a href="https://github.com/Lokeh/BusTracker" target=_blank><i class="fa fa-github fa-2x"></i></a></li></ul>
 </div>

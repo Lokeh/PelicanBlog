@@ -1,0 +1,31 @@
+Title: Fairy Magic: Exploring Angular-like 2-Way Databinding
+Date: 2014-07-03
+Category: blogpost
+Tags: JavaScript, AngularJS, exploring
+Slug: fairy-magic
+Author: Will Acton
+Summary: 
+
+I like AngularJS. A lot. I've explored Backbone on a very surface level, but Angular does a lot of really nice things out of the box that I've been able to take great advantage of in my [current main project](http://github.com/Lokeh/Bustracker), PDX InTransit - a mobile app written to quickly and easily find stops and arrivals for Portland's Trimet system.
+
+Probably the most eye-candyish aspect of Angular (and many of the other modern MV*-esque frontend frameworks) is two-way databinding. It does a number of very neat things, notably:
+- Greatly simplifies your code, and allows you to better separate your concerns; your controller code doesn't need to muddle with your view code at all.
+- Allows you to easily make your UI feel very responsive, creating a snappy, 'live'-feeling experience to your clients that automatically updates based on the user's actions. Basically, what any good front end developer strives to do.
+
+An easy example is displaying a variable in a label or span and updating it via text input. 'Normally,' this would require diving into 'selector-hell' - using either jQuery or the native selector functions to find the appropriate span node in the DOM, update it, check the input node, update it again... this is a lot of code that ends up being tied directly to the markup on my page. Not very reusable, and everytime my variable changes I have to make sure to update both the label and the text input, polluting my controller code with view stuff. With two-way databinding (in this case, using Angular), I can simply do this:
+
+	:::html
+	<span>{{ input }}</span>
+	<input ng-model="input" />
+
+That's it. No more code required for the view. No messing with the DOM. In my controller code, I might be using the input to search a database or flat file, or maybe once the user is happy with their content and how it's displaying I'll post it to a CMS of some sort. I don't have to do anything to make sure that my input variable is updating from the view - two-way databinding takes care of that for me.
+
+Magic, I say! And many have made that complaint about Angular and many of the other JavaScript frameworks: that people new(er) to JavaScript and learning Angular will succumb to it's spell and let it do all the heavy lifting, leaving the young developer unable to understand or troubleshoot anything!
+
+So I decided to try to do it myself: enter [PixieDust](http://github.com/Lokeh/PixieDust), a two-way databinding library I wrote over the course of a couple days. At the moment, it is incredibly simple: you can wire up variables in the view, and detect text input and button clicks. It was an interesting endeavor, and was great practice in coming up with ways to transform the DOM and use data structures to keep track of constantly changing data.
+
+One of the shortfalls of my current solution is that it is constantly checking the bound variables every 60ms (to account for visual lag) - which could get hairy with large amounts of variables bound in the view. The first iteration, though, I was constantly traversing the DOM every cycle! Yikes! AngularJS solves this problem by wrapping all of it's assignments in it's $apply method, which notifies the binding to update.
+
+Another interesting problem someone on reddit pointed out is that addEventListener does not garbage collect when the DOM node is destroyed. While not too big of a deal for small apps, an app with a large amount of views or a few views with LOTS of forms. Apparently, switching to binding directly to the node property is the way to go, but something I want to investigate more before I implement.
+
+I dived into the source code of Angular and used that as a sort-of kind-of model, but for the most part I tried to just work through each hurdle I came across and see what I came up with at the end. Overall, it was a fun experiment that gave me an opportunity to peel back a bit of how AngularJS works. I'll probably revisit it later to see what I would do differently, as well as add more functionality to it - it might be useful in a future project!
