@@ -9,6 +9,7 @@ Summary:
 I like AngularJS. A lot. I've explored Backbone on a very surface level, but Angular does a lot of really nice things out of the box that I've been able to take great advantage of in my [current main project](http://github.com/Lokeh/Bustracker), PDX InTransit - a mobile app written to quickly and easily find stops and arrivals for Portland's Trimet system.
 
 Probably the most eye-candyish aspect of Angular (and many of the other modern MV*-esque frontend frameworks) is two-way databinding. It does a number of very neat things, notably:
+
 - Greatly simplifies your code, and allows you to better separate your concerns; your controller code doesn't need to muddle with your view code at all.
 - Allows you to easily make your UI feel very responsive, creating a snappy, 'live'-feeling experience to your clients that automatically updates based on the user's actions. Basically, what any good front end developer strives to do.
 

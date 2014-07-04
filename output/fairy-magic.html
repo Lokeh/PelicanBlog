@@ -46,9 +46,11 @@
 <article class="post">
 	<header><h2>Fairy Magic: Exploring Angular-like 2-Way Databinding <span class="date">July 03, 2014</span></h2></header>
 	<p><p>I like AngularJS. A lot. I've explored Backbone on a very surface level, but Angular does a lot of really nice things out of the box that I've been able to take great advantage of in my <a href="http://github.com/Lokeh/Bustracker">current main project</a>, PDX InTransit - a mobile app written to quickly and easily find stops and arrivals for Portland's Trimet system.</p>
-<p>Probably the most eye-candyish aspect of Angular (and many of the other modern MV*-esque frontend frameworks) is two-way databinding. It does a number of very neat things, notably:
-- Greatly simplifies your code, and allows you to better separate your concerns; your controller code doesn't need to muddle with your view code at all.
-- Allows you to easily make your UI feel very responsive, creating a snappy, 'live'-feeling experience to your clients that automatically updates based on the user's actions. Basically, what any good front end developer strives to do.</p>
+<p>Probably the most eye-candyish aspect of Angular (and many of the other modern MV*-esque frontend frameworks) is two-way databinding. It does a number of very neat things, notably:</p>
+<ul>
+<li>Greatly simplifies your code, and allows you to better separate your concerns; your controller code doesn't need to muddle with your view code at all.</li>
+<li>Allows you to easily make your UI feel very responsive, creating a snappy, 'live'-feeling experience to your clients that automatically updates based on the user's actions. Basically, what any good front end developer strives to do.</li>
+</ul>
 <p>An easy example is displaying a variable in a label or span and updating it via text input. 'Normally,' this would require diving into 'selector-hell' - using either jQuery or the native selector functions to find the appropriate span node in the DOM, update it, check the input node, update it again... this is a lot of code that ends up being tied directly to the markup on my page. Not very reusable, and everytime my variable changes I have to make sure to update both the label and the text input, polluting my controller code with view stuff. With two-way databinding (in this case, using Angular), I can simply do this:</p>
 <div class="highlight"><pre><span class="nt">&lt;span&gt;</span>{{ input }}<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;input</span> <span class="na">ng-model=</span><span class="s">&quot;input&quot;</span> <span class="nt">/&gt;</span>
