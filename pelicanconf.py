@@ -7,7 +7,7 @@ SITENAME = u'Will Acton : Web Developer and Brazilian Jiu Jitsu Fanatic'
 SITEDESC = u'Web developer and BJJ fanatic from Portland, OR. A blog about front end, back end, every-end web development. Fitness and jiu jitsu also make appearances.'
 SITEURL = 'http://willacton.com/'
 
-TIMEZONE = 'USA/Pacific'
+TIMEZONE = 'America/Los_Angeles'
 THEME = "theme/summerblue"
 CSS_FILE = 'style.css'
 
