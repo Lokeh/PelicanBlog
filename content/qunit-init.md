@@ -1,5 +1,5 @@
 Title: QUnit: Module initialization
-Date: 2015-01-14
+Date: 2015-01-20
 Category: blogpost
 Tags: JavaScript, QUnit, unit testing, functional
 Slug: qunit-module-init
