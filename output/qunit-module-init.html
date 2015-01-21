@@ -1,0 +1,129 @@
+<!-- article.html -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Web developer and BJJ fanatic from Portland, OR. A blog about front end, back end, every-end web development. Fitness and jiu jitsu also make appearances.">
+		<meta name="author" content="Will Acton">
+		<title>Will Acton : Web Developer and Brazilian Jiu Jitsu Fanatic</title>
+		<link href="http://willacton.com/theme/css/normalize.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="http://willacton.com/theme/style.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<section class="sidebar">
+				<h1><a href="http://willacton.com">Will Acton</a></h1>
+				<div id="round-pic"></div>
+				<h2>Web Developer <i class="and"></i>  BJJ Fanatic</h2>
+				<ul class="nav" role="navigation">
+					<li><a href="http://willacton.com">Home</a></li>
+		            | <li><a href="http://willacton.com/pages/about-me.html">About Me</a></li>
+		            | <li><a href="http://willacton.com/pages/projects.html">Projects</a></li>
+				</ul>
+				
+				<ul class="socials">
+					<li><a href="mailto:hello@willacton.com" target=_blank><i class="fa fa-envelope fa-2x"></i></a></li>
+					<li><a href="http://github.com/Lokeh/" target=_blank><i class="fa fa-github fa-2x"></i></a></li>
+					<li><a href="https://www.linkedin.com/pub/will-acton/5b/375/66b" target=_blank><i class="fa fa-linkedin fa-2x"></i></a></li>
+				</ul>
+
+				<h3>Recent posts</h3>
+				<ul class="activity">
+					<li><a href="http://willacton.com/qunit-module-init.html">QUnit: Module initialization</a></li>
+					<li><a href="http://willacton.com/geolocation-gotchas.html">Mobile Geolocation Gotchas</a></li>
+					<li><a href="http://willacton.com/fairy-magic.html">Fairy Magic: Exploring Angular-like 2-Way Databinding</a></li>
+					<li><a href="http://willacton.com/learns-from-javascript-pragmatic-programmer.html">Refactor, Refactor, Refactor: Learns from JavaScript, Pragmatic Programmer</a></li>
+				</ul>
+			</section>
+			<section class="main">
+				<div class="content">
+<article class="post">
+	<header><h2>QUnit: Module initialization <span class="date">January 14, 2015</span></h2></header>
+	<p><p>Fun fact: I started a new job back in September doing front end development! Thus, the lack of posts recently. However, today I have something neat that I thought was worth sharing.</p>
+<p>A large part of my new job has been learning about and writing unit tests with our projects. The framework we decided to use is <a href="http://qunitjs.com">QUnit</a>, a testing framework developed by the same team that maintains JQuery. It has a fairly simple API, and easy integration with Grunt and other tools we use in our workflow.</p>
+<p>The API contains your standard assertions: equals, notEquals, ok (for generic truth-y checking), and more specific assertions like deepEquals, which allows us to compare JavaScript objects by their key/value pairs.</p>
+<p>QUnit also gives us a way to separate our tests into 'modules'. This can be a good way to organize our tests, as well as set specific functions to be run before each test (defined in our QUnit module). Such as:</p>
+<div class="highlight"><pre><span class="nx">QUnit</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;View module&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">beforEach</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do specific setup instructions before each test</span>
+    <span class="p">},</span>
+    <span class="nx">afterEach</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do specific teardown instructions after each test</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>However, there are some functions that we want to run before our tests that may be resource (CPU, memory, network, etc.) intensive. Usually we only want to run these once, at most, and then cache the data for later. We could do this in the global scope, but depending on the nature of the tests this could introduce side effects into our test code.</p>
+<p>Enter: Once(), a function inspired by the lodash/underscore library. It's a very nice function; it looks like this:</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">Once</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">isFirst</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">retVal</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// args is an array of arguments to pass to the function</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isFirst</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if first time running the function</span>
+            <span class="nx">retVal</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span> <span class="c1">// run the function with the given argument list, cache the result</span>
+            <span class="nx">isFirst</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// don&#39;t run it again</span>
+            <span class="nx">func</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// clear the function from memory (to be GCed)</span>
+            <span class="k">return</span> <span class="nx">retVal</span><span class="p">;</span> <span class="c1">// return the value</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span> <span class="c1">// if we&#39;ve already run the function</span>
+            <span class="k">return</span> <span class="nx">retVal</span><span class="p">;</span> <span class="c1">// return the cached value</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>'Once()' returns a new function that, as the name suggests, will only actually run once. After the first time, the result is cached and returned for each subsequent call.</p>
+<p>A useful example would be an AJAX request. Maybe we want to request some data (that we can easily swap out depending on changing requirements) and use that in our tests. The request could look something like this:</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">done</span> <span class="o">=</span> <span class="nx">assert</span><span class="p">.</span><span class="nx">async</span><span class="p">();</span> <span class="c1">// QUnit&#39;s assert.async() function tells the framework to pause all tests until done() is called.</span>
+
+    <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;data/example.json&#39;</span><span class="p">);</span>
+    <span class="nx">promise</span><span class="p">.</span><span class="nx">always</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">done</span><span class="p">();</span>
+    <span class="p">});</span>
+
+    <span class="k">return</span> <span class="nx">promise</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>However, if we ran this before every test, it would send the request over the network each time a test was run; if the data is sizeable, it could seriously slow down our build time. Instead, let's use Once() to create a new function that will cache the result the first time it's run, and then throw it in our module definition:</p>
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">moduleInit</span> <span class="o">=</span> <span class="nx">Once</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+
+<span class="nx">QUnit</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;View module&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">beforeEach</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">$r</span> <span class="o">=</span> <span class="nx">moduleInit</span><span class="p">([</span><span class="nx">assert</span><span class="p">]);</span> <span class="c1">// func.apply() requires us to pass our arguments in as an array</span>
+
+        <span class="nx">$r</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// do something with the data</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">afterEach</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do specific teardown instructions after each test</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>Now, the request will only be run the first time, and the whole module will be run once the asynchronous request returns the data needed. In a module with lots of tests, even for a small amount of data this can shave off a large percentage of run time.</p></p>
+</article>
+
+				</div>
+				<div class="footer">
+					Copyright Will Acton.
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
