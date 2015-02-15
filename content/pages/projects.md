@@ -3,7 +3,7 @@ Date: 2014-06-11
 
 <style>
 	.project > .image {
-	    height: 198px;
+	    max-height: 198px;
 	    overflow: hidden;
 	    width: 63%;
 	    margin: 0 auto;
